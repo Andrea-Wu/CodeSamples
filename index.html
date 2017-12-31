@@ -1,0 +1,44 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>
+			Index
+		</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			function funky(){
+                		console.log("wow");
+				alert("wiw");
+               			$.ajax({
+                        		type: "POST",
+                        		data: document.getElementById("command").value,
+                        		success: function(){
+                               			console.log("I did it");
+                        		}            
+		   			});
+        		}
+		
+
+			function alertMe(){
+				alert("hehehe");
+				$("button").css("color","red");
+			}
+
+		</script>
+	</head>
+
+	<body>
+		<h1>
+			Herro this is a webserver!!
+		</h1>
+
+		
+		<div>
+		<form>
+			command: <input type="text" name="command" id="command" ><br>
+			<input type="button" id="submit" onclick="funky()">	
+		</form>
+		<button onclick="alertMe()">He</button>
+		</div>
+	</body>
+</html>
