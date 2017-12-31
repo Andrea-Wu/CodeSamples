@@ -5,24 +5,19 @@
 			Index
 		</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script>
+		<script> 
+			//this allows form to "submit" without refreshing page
 			function funky(){
                 		console.log("wow");
-				alert("wiw");
                			$.ajax({
                         		type: "POST",
                         		data: document.getElementById("command").value,
                         		success: function(){
                                			console.log("I did it");
                         		}            
-		   			});
+		   		});
         		}
 		
-
-			function alertMe(){
-				alert("hehehe");
-				$("button").css("color","red");
-			}
 
 		</script>
 	</head>
@@ -38,7 +33,6 @@
 			command: <input type="text" name="command" id="command" ><br>
 			<input type="button" id="submit" onclick="funky()">	
 		</form>
-		<button onclick="alertMe()">He</button>
 		</div>
 	</body>
 </html>
