@@ -1,0 +1,32 @@
+const express = require("express")
+const app = express()
+
+var http = require("http");
+http.createServer(function(request, response){
+	var date = new Date();
+	var dateString  = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+	response.writeHead(200, {"Content-Type": "text/html"});
+	response.end('<b>Hello World</b><br /><i>The date is: ' + dateString + '</i><br /><br />The requested URL is: ' + request.url);
+}).listen(3000);
+
+var pty = require("pty.js");
+
+var term = pty.spawn('bash', [], {
+	name: 'xterm-color',
+	cols: 80,
+	rows: 100,
+	cwd: process.env.HOME, //the f is this?
+	env: process.env
+});
+
+term.on("data", function(data){
+	console.log(data);
+//	console.log("!!!!!!!!!!!!!");
+});
+	
+term.write("ls\r");
+//term.resize(100,40);
+term.write("ls /\r");
+term.write("ps\r");
+
+//console.log(term.process);
