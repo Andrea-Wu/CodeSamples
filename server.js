@@ -5,7 +5,7 @@ var querystring = require('querystring');
 
 
 //copied from stackoverflow
-function processPost(request, response, callback) {
+function processPost(request, response) {
 	var queryData = "";
 
  
@@ -20,7 +20,12 @@ function processPost(request, response, callback) {
 
         request.on('end', function() {
             request.post = queryData;
-            callback();
+            console.log(request.post);
+
+            response.writeHead(200, "OK", {'Content-Type': 'text/plain'});
+            response.end();
+
+
         });
 }
 
@@ -35,13 +40,7 @@ http.createServer(function(request,response){
 	}
 
 	else if(request.method == 'POST'){
-		processPost(request, response, function(){
-			console.log(request.post);
-			
-			response.writeHead(200, "OK", {'Content-Type': 'text/plain'});
-            		response.end();
-
-		});
+		processPost(request, response);
 	}
 }).listen(3000);
 
@@ -50,7 +49,4 @@ console.log("Server is running!");
 
 
 //need to output to command line whenever 
-//form is submitted...
-
-
-
+//form is submitted...e
