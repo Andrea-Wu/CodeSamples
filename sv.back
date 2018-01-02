@@ -3,7 +3,6 @@ var fs = require("fs");
 var pty = require("pty.js");
 var querystring = require('querystring');
 
-var myGlobal="";
 
 var term =  pty.spawn('bash', [], {
 	name: 'xterm-color',
@@ -13,12 +12,9 @@ var term =  pty.spawn('bash', [], {
         env: process.env
 });
 
-
 term.on("data", function(data){
-        console.log(data);
-	myGlobal = myGlobal+ data;
+                console.log(data);
 });
-
 
 
 
@@ -36,19 +32,11 @@ function processPost(request, response) {
         });
 
         request.on('end', function() {
-            	request.post = queryData;
+            request.post = queryData;
 
-	    	term.write(request.post + "\r");
-
-		//need to create a new event handler that's not called "data"
-		//need to find out where term.write is writing to
-		//implement the same functionality as term.on("data")
-
-		//OR use a global variaable
-
-
-            	response.writeHead(200, "OK", {'Content-Type': 'text/plain'});
-            	response.end();
+	    term.write(request.post + "\r");
+            response.writeHead(200, "OK", {'Content-Type': 'text/plain'});
+            response.end();
 
         });
 }
